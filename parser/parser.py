@@ -32,7 +32,7 @@ INFO = {}
 
 SCOREBOARD = os.getenv('SCOREBOARD', 'http://6.0.0.1')
 HEADLESS = True if os.getenv('TYPE', 'hackerdom') == "forcad" else False
-TEAM = os.getenv('TEAM', 'Red Cadets')
+TEAM = os.getenv('TEAM', 'FaKappa')
 MONGO_USER = os.getenv('MONGO_USER', 'parser')
 MONGO_PASS = os.getenv('MONGO_PASS', 'parser')
 

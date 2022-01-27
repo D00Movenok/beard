@@ -5,7 +5,7 @@ from pymongo import MongoClient
 
 CONFIG = {
     "SCOREBOARD":   os.getenv('SCOREBOARD', 'http://127.0.0.1:8090'),
-    "TEAM":         os.getenv('TEAM', 'Red Cadets'),
+    "TEAM":         os.getenv('TEAM', 'FaKappa'),
     "TYPE":         os.getenv('TYPE', 'forcad'),
     "BOT_URL":      os.getenv('BOT_URL', 'https://bot.example.com/key'),
     "MONGO_USER":   os.getenv('MONGO_USER', 'parser'),

@@ -8,6 +8,7 @@ import board_parser
 coloredlogs.install()
 
 URL = os.getenv('BOT_URL', 'https://bot.example.com/key')
+TOKEN = os.getenv('BOT_TOKEN')
 
 
 class AD(object):
@@ -176,21 +177,20 @@ class AD(object):
 def telegram_alert(alert_type, **args):
     if alert_type == 'PLACE':
         requests.post(URL, json={
-            "message": "{} с *{}* на *{}* место".format('⬇ Наша команда спустилась' if args['status'] == 'down' else '⬆ Наша команда поднялась', args['place_old'], args['place_new']),
-            "type": "markdown",
-            "id": "parser"
+            "message": "{} с <b>{}</b> на <b>{}</b> место".format('⬇ Наша команда спустилась' if args['status'] == 'down' else '⬆ Наша команда поднялась', args['place_old'], args['place_new']),
+            "access_token": TOKEN
         })
     if alert_type == 'STATUS':
         if args['now'] == 'UP':
-            simb = '*🟢 {} 🟢*\n'
+            simb = '<b>🟢 {} 🟢</b>\n'
         elif args['now'] == 'DOWN':
-            simb = '*🔴 {} 🔴*\n'
+            simb = '<b>🔴 {} 🔴</b>\n'
         elif args['now'] == 'CORRUPT':
-            simb = '*🔵 {} 🔵*\n'
+            simb = '<b>🔵 {} 🔵</b>\n'
         elif args['now'] == 'MUMBLE':
-            simb = '*🟠 {} 🟠*\n'
+            simb = '<b>🟠 {} 🟠</b>\n'
         elif args['now'] == 'CHECK FAILED':
-            simb = '*🟡 {} 🟡*\n'
+            simb = '<b>🟡 {} 🟡</b>\n'
 
         if args['status'] == 'down':
             otvet = "Сервису поплохело"
@@ -201,22 +201,19 @@ def telegram_alert(alert_type, **args):
         elif args['status'] == 'not change':
             otvet = "Сервису ВСЁ ЕЩЁ плохо"
             if args['title']:
-                otvet += "\n *Check Error:* {}".format(args['title'])
+                otvet += "\n </b>Check Error:</b> {}".format(args['title'])
 
         requests.post(URL, json={
             "message": "{} {}".format(simb.format(args['service']), otvet),
-            "type": "markdown",
-            "id": "parser"
+            "access_token": TOKEN
         })
     if alert_type == 'FB':
         requests.post(URL, json={
-            "message": "🩸 Мы теряем флаги на сервисе *{}*".format(args['service']),
-            "type": "markdown",
-            "id": "parser"
+            "message": "🩸 Мы теряем флаги на сервисе <b>{}</b>".format(args['service']),
+            "access_token": TOKEN
         })
     if alert_type == 'PATCH':
         requests.post(URL, json={
-            "message": "💎 Мы запатчили сервис *{}*".format(args['service']),
-            "type": "markdown",
-            "id": "parser"
+            "message": "💎 Мы запатчили сервис <b>{}</b>".format(args['service']),
+            "access_token": TOKEN
         })
