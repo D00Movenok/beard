@@ -7,7 +7,7 @@ import board_parser
 
 coloredlogs.install()
 
-URL = os.getenv('BOT_URL', 'https://bot.example.com/key')
+URL = os.getenv('BOT_URL', 'https://bot.example.com/key') + '/api/notify'
 TOKEN = os.getenv('BOT_TOKEN')
 
 
